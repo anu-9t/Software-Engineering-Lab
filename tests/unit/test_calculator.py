@@ -44,3 +44,20 @@ class TestMultiplyDivideWithValidation:
             divide("10", 2)
 
 # TODO: Students will add TestMultiplyDivide class
+class TestMultiplyDivide:
+    """Test multiplication and division arithmetic"""
+
+    def test_multiply_numbers(self):
+        """Test multiplying numbers"""
+        assert multiply(3, 4) == 12
+        assert multiply(-2, 3) == -6
+
+    def test_divide_numbers(self):
+        """Test dividing numbers"""
+        assert divide(10, 2) == 5
+        assert divide(9, 3) == 3
+
+    def test_divide_by_zero(self):
+        """Test dividing by zero raises ValueError"""
+        with pytest.raises(ValueError, match="Cannot divide"):
+            divide(10, 0)
