@@ -3,7 +3,7 @@ Unit Tests for Calculator
 Students start with 2 passing tests, then add more
 """
 import pytest
-from src.calculator import add, divide, subtract, multiply
+from src.calculator import add, divide, subtract, multiply, power, sqrt
 
 class TestBasicOperations:
     """Test basic arithmetic operations"""
@@ -61,3 +61,35 @@ class TestMultiplyDivide:
         """Test dividing by zero raises ValueError"""
         with pytest.raises(ValueError, match="Cannot divide"):
             divide(10, 0)
+
+class TestAdvancedOperations:
+    """Test power and square root operations with validation."""
+
+    def test_power_numbers(self):
+        """Test power calculation"""
+        assert power(2, 3) == 8
+        assert power(5, 0) == 1
+        assert power(2, -1) == 0.5
+
+    def test_power_input_validation(self):
+        """Test power rejects non-numeric inputs."""
+        with pytest.raises(TypeError, match="Both arguments must be numbers"):
+            power("2", 3)
+        with pytest.raises(TypeError, match="Both arguments must be numbers"):
+            power(2, "3")
+
+    def test_sqrt_numbers(self):
+        """Test square root calculation"""
+        assert sqrt(16) == 4
+        assert sqrt(0) == 0
+        assert sqrt(2.25) == 1.5
+
+    def test_sqrt_negative(self):
+        """Test square root of negative numbers raises ValueError"""
+        with pytest.raises(ValueError, match="Cannot calculate square root"):
+            sqrt(-4)
+
+    def test_sqrt_input_validation(self):
+        """Test sqrt rejects non-numeric inputs."""
+        with pytest.raises(TypeError, match="Input must be a number"):
+            sqrt("16")
